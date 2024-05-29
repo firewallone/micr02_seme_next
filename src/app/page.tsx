@@ -1,23 +1,24 @@
-import prisma from '@/utils/prisma'
 import CarList from '@/components/CarList'
+import prisma from '@/utils/prisma'
 
 const getCars = async () => {
   const cars = await prisma.car.findMany({
     include: {
       model: true,
-      brand: true
-    }
-  });
-  return cars;
+      brand: true,
+    },
+  })
+  return cars
 }
 
-const HomePade = async () => {
+const HomePage = async () => {
   const cars = await getCars()
-  return
-  (
+  return (
     <div>
-      Home page
-      </CarList cars={cars}>
+      Home Page
+      <CarList cars={cars} />
     </div>
   )
 }
+
+export default HomePage
