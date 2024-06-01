@@ -1,18 +1,15 @@
-import CarItem from './CarItem'
-import { CarWithDeps } from '@/types/prismaTypes'
+import { CarWithDeps } from '@/types/prismaTypes';
+import CarItem from './CarItem';
+import styles from './CarList.module.css';
 
-type Props = {
-  cars: CarWithDeps[]
-}
-
-const CarList = ({ cars }: Props) => {
+const CarList = ({ cars }: { cars: CarWithDeps[] }) => {
   return (
-    <div>
+    <div className={styles.carList}>
       {cars.map((car) => (
         <CarItem key={car.id} car={car} />
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default CarList
+export default CarList;

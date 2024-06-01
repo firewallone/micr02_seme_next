@@ -1,6 +1,7 @@
-import styles from './home.module.css';
-import CarList from '@/components/CarList'
-import prisma from '@/utils/prisma'
+import styles from './HomePage.module.css';
+import CarList from '@/components/CarList';
+import prisma from '@/utils/prisma';
+import Link from 'next/link';
 
 const getCars = async () => {
   const cars = await prisma.car.findMany({
@@ -8,21 +9,26 @@ const getCars = async () => {
       model: true,
       brand: true,
     },
-  })
-  return cars
-}
+  });
+  return cars;
+};
 
 const HomePage = async () => {
   const cars = await getCars();
   return (
-    <div className={`${styles.homePage} container`}>
-      <div className={styles.header}>
-        <h1>Home Page</h1>
-      </div>
-      <hr className={styles.divider} />
-      <div className={styles.carList}>
-        <CarList cars={cars} />
-      </div>
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <h1 className={styles.headerTitle}>My Car App</h1>
+        <Link href="/car/new" className={styles.addButton}>
+          Add New Car
+        </Link>
+      </header>
+      <main className={styles.mainContent}>
+        <div className={styles.title}>List aut</div>
+        <div className={styles.carListContainer}>
+          <CarList cars={cars} />
+        </div>
+      </main>
     </div>
   );
 };
