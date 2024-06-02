@@ -1,0 +1,30 @@
+/* CarSearchForm.module.css */
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #e0e0e0;
+  color: #000;
+}

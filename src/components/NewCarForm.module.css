@@ -50,22 +50,22 @@
   color: #333;
 }
 
-.detailTable {
+.newTable {
   width: 100%;
   border-collapse: collapse;
 }
 
-.detailTable th,
-.detailTable td {
+.newTable th,
+.newTable td {
   padding: 0.75rem;
   border: 1px solid #ccc;
 }
 
-.detailTable th {
+.newTable th {
   background-color: #f7f7f7;
   text-align: left;
 }
 
-.detailTable td {
+.newTable td {
   background-color: #fff;
 }
