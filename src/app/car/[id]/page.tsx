@@ -1,4 +1,4 @@
-import prisma from '@/utils/prisma';
+import prisma from '@/utils/prismaClient';
 import Link from 'next/link';
 import styles from './CarDetail.module.css';
 

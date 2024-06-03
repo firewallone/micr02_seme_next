@@ -1,8 +1,11 @@
-import styles from './HomePage.module.css';
 import CarList from '@/components/CarList';
-import prisma from '@/utils/prisma';
+import prisma from '@/utils/prismaClient';
+import styles from './HomePage.module.css';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import CarSearchForm from '@/components/CarSearchForm';
+
+const SearchCarList = dynamic(() => import('@/components/SearchCarList'), { ssr: false });
+
 
 const getCars = async () => {
   const cars = await prisma.car.findMany({
@@ -14,14 +17,9 @@ const getCars = async () => {
   return cars;
 };
 
-// eslint-disable-next-line @next/next/no-async-client-component
+
 const HomePage = async () => {
   const cars = await getCars();
-  
-  const handleSearch = (query: string) => {
-    // Handle search functionality here
-    console.log('Search query:', query);
-  };
 
   return (
     <div className={styles.container}>
@@ -34,7 +32,8 @@ const HomePage = async () => {
       <main className={styles.mainContent}>
       <div className={styles.title}>
       </div>
-        <div className={styles.title}>List</div>
+      <div className={styles.title}>List</div>
+      <SearchCarList />
         <div className={styles.carListContainer}>
           <CarList cars={cars} />
         </div>

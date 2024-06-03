@@ -1,5 +1,5 @@
 import NewCarForm from '@/components/NewCarForm';
-import prisma from '@/utils/prisma';
+import prisma from '@/utils/prismaClient';
 import Link from 'next/link';
 import styles from './NewCar.module.css';
 

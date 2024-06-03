@@ -1,25 +1,39 @@
-'use client'
-import { useState } from 'react';
-import styles from './CarSearchForm.module.css';
+// components/CarSearchForm.tsx
 
-const CarSearchForm = ({ onSearch }: { onSearch: (query: string) => void }) => {
-  const [searchQuery, setSearchQuery] = useState('');
+import React, { useState, useEffect } from 'react';
+import { CarWithDeps } from '@/types/prismaTypes';
 
-  const handleSearch = () => {
-    onSearch(searchQuery);
+interface CarSearchFormProps {
+  cars: CarWithDeps[];
+  onSearchResult: (filteredCars: CarWithDeps[]) => void;
+}
+
+const CarSearchForm: React.FC<CarSearchFormProps> = ({ cars, onSearchResult }) => {
+  const [query, setQuery] = useState('');
+
+  useEffect(() => {
+    const lowercasedQuery = query.toLowerCase();
+    const filtered = cars.filter(
+      (car) =>
+        car.brand.name.toLowerCase().includes(lowercasedQuery) ||
+        car.model.name.toLowerCase().includes(lowercasedQuery)
+    );
+    onSearchResult(filtered);
+  }, [query, cars, onSearchResult]);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(event.target.value);
   };
 
   return (
-    <div className={styles.container}>
+    <form>
       <input
         type="text"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        placeholder="Search cars..."
-        className={styles.input}
+        value={query}
+        onChange={handleChange}
+        placeholder="Search by brand or model"
       />
-      <button onClick={handleSearch} className={styles.button}>Search</button>
-    </div>
+    </form>
   );
 };
 

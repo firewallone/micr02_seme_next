@@ -1,7 +1,7 @@
 'use server'
 
 import { redirect } from 'next/navigation'
-import prisma from './prisma'
+import prisma from './prismaClient'
 
 export const createCar = async (formData: FormData) => {
   const modelId = formData.get('modelId')?.toString()
