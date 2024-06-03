@@ -3,6 +3,7 @@ import prisma from '@/utils/prismaClient';
 import styles from './HomePage.module.css';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import { Suspense } from 'react';
 
 const SearchCarList = dynamic(() => import('@/components/SearchCarList'), { ssr: false });
 
@@ -16,7 +17,6 @@ const getCars = async () => {
   });
   return cars;
 };
-
 
 const HomePage = async () => {
   const cars = await getCars();
@@ -33,9 +33,10 @@ const HomePage = async () => {
       <div className={styles.title}>
       </div>
       <div className={styles.title}>List</div>
-      <SearchCarList />
         <div className={styles.carListContainer}>
-          <CarList cars={cars} />
+        <Suspense fallback={<div>Loading...</div>}>
+        <SearchCarList />
+      </Suspense>
         </div>
       </main>
     </div>

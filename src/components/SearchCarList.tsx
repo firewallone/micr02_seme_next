@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback,Suspense  } from 'react';
 import CarList from './CarList';
 import CarSearchForm from './CarSearchForm';
 import { CarWithDeps } from '@/types/prismaTypes';
 import styles from '@/components/CarSearchForm.module.css';
 
 const fetchCars = async (): Promise<CarWithDeps[]> => {
-  const response = await fetch('/apis/fetchCars');
+  const response = await fetch('/apis/cars');
   if (!response.ok) {
     throw new Error('Failed to fetch cars');
   }
@@ -17,6 +17,7 @@ const fetchCars = async (): Promise<CarWithDeps[]> => {
 const SearchCarList: React.FC = () => {
   const [cars, setCars] = useState<CarWithDeps[]>([]);
   const [filteredCars, setFilteredCars] = useState<CarWithDeps[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   const getCars = useCallback(async () => {
     try {
@@ -24,7 +25,11 @@ const SearchCarList: React.FC = () => {
       setCars(carList);
       setFilteredCars(carList); // Initially show all cars
     } catch (error) {
-      console.error(error);
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError('An unknown error occurred');
+      }
     }
   }, []);
 
@@ -40,7 +45,9 @@ const SearchCarList: React.FC = () => {
     <div>
       <CarSearchForm cars={cars} onSearchResult={handleSearchResult} />
       <div className={styles.carListContainer}>
+      <Suspense fallback={<div>Loading...</div>}>
         <CarList cars={filteredCars} />
+        </Suspense>
       </div>
     </div>
   );

@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '@/utils/prismaClient';
+import { NextResponse } from 'next/server';
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const fetchCar = await prisma.car.findMany({
       include: {
@@ -9,10 +10,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         brand: true,
       },
     });
-    res.status(200).json(fetchCar);
+    return NextResponse.json(fetchCar); 
   } catch (error) {
-    res.status(500).json({ error: 'Error fetching cars' });
+    return NextResponse.error();
   }
 };
-
-export default handler;
