@@ -1,6 +1,6 @@
-import prisma from '@/utils/prismaClient';
-import Link from 'next/link';
-import styles from './CarDetail.module.css';
+import prisma from "@/utils/prismaClient";
+import Link from "next/link";
+import styles from "./CarDetail.module.css";
 
 const fetchCarDetail = async (id: string) => {
   const car = await prisma.car.findUnique({
@@ -16,10 +16,14 @@ const CarDetailPage = async ({ params }: { params: { id: string } }) => {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <Link href="/" className={styles.backButton}>Home</Link>
+        <Link href="/" className={styles.backButton}>
+          Home
+        </Link>
       </header>
       <main className={styles.mainContent}>
-        <h1 className={styles.title}>{car?.brand.name} {car?.model.name}</h1>
+        <h1 className={styles.title}>
+          {car?.brand.name} {car?.model.name}
+        </h1>
         <table className={styles.detailTable}>
           <tbody>
             <tr>

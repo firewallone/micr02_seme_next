@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { Brand, CarModel } from '@prisma/client';
-import { Fragment, useMemo, useState } from 'react';
+import { Brand, CarModel } from "@prisma/client";
+import { Fragment, useMemo, useState } from "react";
 
 const BrandAndModelFormFields = ({
   models,
@@ -10,7 +10,7 @@ const BrandAndModelFormFields = ({
   models: CarModel[];
   brands: Brand[];
 }) => {
-  const [brandId, setBrandId] = useState('');
+  const [brandId, setBrandId] = useState("");
 
   const filteredModels = useMemo(() => {
     return models.filter((model) => model.brandId === brandId);

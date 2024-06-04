@@ -1,6 +1,6 @@
-import { CarWithDeps } from '@/types/prismaTypes';
-import CarItem from './CarItem';
-import styles from './CarList.module.css';
+import { CarWithDeps } from "@/types/prismaTypes";
+import CarItem from "./CarItem";
+import styles from "./CarList.module.css";
 
 const CarList = ({ cars }: { cars: CarWithDeps[] }) => {
   return (

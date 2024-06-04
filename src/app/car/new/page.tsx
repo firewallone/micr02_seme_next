@@ -1,7 +1,7 @@
-import NewCarForm from '@/components/NewCarForm';
-import prisma from '@/utils/prismaClient';
-import Link from 'next/link';
-import styles from './NewCar.module.css';
+import NewCarForm from "@/components/NewCarForm";
+import prisma from "@/utils/prismaClient";
+import Link from "next/link";
+import styles from "./NewCar.module.css";
 
 const fetchBrands = async () => {
   const brands = await prisma.brand.findMany();
@@ -20,7 +20,9 @@ const NewCarPage = async () => {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <Link href="/" className={styles.backButton}>Home</Link>
+        <Link href="/" className={styles.backButton}>
+          Home
+        </Link>
       </header>
       <main className={styles.mainContent}>
         <h1 className={styles.title}>New Car</h1>

@@ -1,6 +1,6 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import prisma from '@/utils/prismaClient';
-import { NextResponse } from 'next/server';
+import { NextApiRequest, NextApiResponse } from "next";
+import prisma from "@/utils/prismaClient";
+import { NextResponse } from "next/server";
 
 export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
@@ -10,7 +10,7 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
         brand: true,
       },
     });
-    return NextResponse.json(fetchCar); 
+    return NextResponse.json(fetchCar);
   } catch (error) {
     return NextResponse.error();
   }
