@@ -18,6 +18,7 @@ const SearchCarList: React.FC = () => {
   const [cars, setCars] = useState<CarWithDeps[]>([]);
   const [filteredCars, setFilteredCars] = useState<CarWithDeps[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const getCars = useCallback(async () => {
     try {
@@ -30,6 +31,8 @@ const SearchCarList: React.FC = () => {
       } else {
         setError("An unknown error occurred");
       }
+    } finally {
+      setLoading(false);
     }
   }, []);
 
@@ -40,6 +43,14 @@ const SearchCarList: React.FC = () => {
   const handleSearchResult = useCallback((filteredCars: CarWithDeps[]) => {
     setFilteredCars(filteredCars);
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <div>
