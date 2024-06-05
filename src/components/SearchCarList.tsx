@@ -42,14 +42,12 @@ const SearchCarList: React.FC = () => {
   }, []);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <div>
-        <CarSearchForm cars={cars} onSearchResult={handleSearchResult} />
-        <div className={styles.carListContainer}>
-          <CarList cars={filteredCars} />
-        </div>
+    <div>
+      <CarSearchForm cars={cars} onSearchResult={handleSearchResult} />
+      <div className={styles.carListContainer}>
+        <CarList cars={filteredCars} />
       </div>
-    </Suspense>
+    </div>
   );
 };
 
